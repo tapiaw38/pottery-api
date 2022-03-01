@@ -8,6 +8,7 @@ import (
 	"github.com/tapiaw38/pottery-api/models"
 )
 
+// CreateUserHandler handles the request to create a new user
 func CreateUserHandler(w http.ResponseWriter, r *http.Request) {
 
 	var u models.User

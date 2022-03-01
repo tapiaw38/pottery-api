@@ -14,8 +14,15 @@ import (
 func HandlerServer() {
 	router := mux.NewRouter()
 
+	users := router.PathPrefix("/api/v1/users").Subrouter()
+
 	// Initialize the routes
-	router.HandleFunc("/api/v1/users/", routers.CreateUserHandler).Methods(http.MethodPost)
+	users.Path("").Methods(
+		http.MethodPost).HandlerFunc(routers.CreateUserHandler)
+	users.Path("").Methods(
+		http.MethodGet).HandlerFunc(routers.GetUsersHandler)
+	users.Path("/user").Methods(
+		http.MethodGet).HandlerFunc(routers.GetUserByIdHandler)
 
 	PORT := os.Getenv("PORT")
 

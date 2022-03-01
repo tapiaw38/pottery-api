@@ -7,6 +7,7 @@ import (
 	"github.com/tapiaw38/pottery-api/models"
 )
 
+// CreateUser inserts a new user into the database
 func CreateUser(ctx context.Context, u *models.User) error {
 
 	q := `

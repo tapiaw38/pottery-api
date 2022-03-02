@@ -11,8 +11,8 @@ func CheckDB(next http.HandlerFunc) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		err := database.CheckConnection()
 
-		if err == false {
-			http.Error(w, "An error occurred when trying to connect to the database", 400)
+		if !err {
+			http.Error(w, "An error occurred when trying to connect to the database", 500)
 			return
 		}
 

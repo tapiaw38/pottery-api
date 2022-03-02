@@ -18,7 +18,10 @@ func Connect() (*sql.DB, error) {
 		log.Println("Error loading .env file")
 	}
 
-	client := "user=" + os.Getenv("DB_USER") + " password=" + os.Getenv("DB_PASSWORD") + " dbname=" + os.Getenv("DB_NAME") + " sslmode=disable"
+	client := "user=" + os.Getenv("DB_USER") +
+		" password=" + os.Getenv("DB_PASSWORD") +
+		" dbname=" + os.Getenv("DB_NAME") +
+		" sslmode=disable"
 
 	return sql.Open("postgres", client)
 

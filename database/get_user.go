@@ -61,3 +61,27 @@ func GetUserById(ctx context.Context, id string) (*models.User, error) {
 	return &u, nil
 
 }
+
+// Get user by username from database
+func GetUserByUsername(ctx context.Context, username string) (*models.User, error) {
+
+	q := `
+	SELECT id, first_name, last_name, username, email, picture, created_at, updated_at
+		FROM users
+		WHERE username = $1;
+	`
+
+	row := data.QueryRowContext(
+		ctx, q, username,
+	)
+
+	u := models.User{}
+
+	err := row.Scan(&u.ID, &u.FirstName, &u.LastName, &u.Username, &u.Email, &u.Picture, &u.CreatedAt, &u.UpdatedAt)
+	if err != nil {
+		return nil, err
+	}
+
+	return &u, nil
+
+}

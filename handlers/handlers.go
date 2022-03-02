@@ -7,6 +7,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
+	"github.com/tapiaw38/pottery-api/middlewares"
 	"github.com/tapiaw38/pottery-api/routers"
 )
 
@@ -19,13 +20,13 @@ func HandlerServer() {
 
 	// Routes for users
 	users.Path("/register").Methods(
-		http.MethodPost).HandlerFunc(routers.CreateUserHandler)
+		http.MethodPost).HandlerFunc(middlewares.CheckDB(routers.CreateUserHandler))
 	users.Path("").Methods(
-		http.MethodGet).HandlerFunc(routers.GetUsersHandler)
+		http.MethodGet).HandlerFunc(middlewares.CheckDB(routers.GetUsersHandler))
 	users.Path("/user").Methods(
-		http.MethodGet).HandlerFunc(routers.GetUserByIdHandler)
+		http.MethodGet).HandlerFunc(middlewares.CheckDB(routers.GetUserByIdHandler))
 	users.Path("/profile").Methods(
-		http.MethodGet).HandlerFunc(routers.GetUserByUsernameHandler)
+		http.MethodGet).HandlerFunc(middlewares.CheckDB(routers.GetUserByUsernameHandler))
 
 	// Initialize the server
 	PORT := os.Getenv("PORT")

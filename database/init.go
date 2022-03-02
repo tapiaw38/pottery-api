@@ -40,3 +40,15 @@ func NewConnection() *sql.DB {
 
 	return data
 }
+
+// Check connection to the database
+func CheckConnection() bool {
+
+	err := data.Ping()
+
+	if err != nil {
+		return false
+	}
+
+	return true
+}

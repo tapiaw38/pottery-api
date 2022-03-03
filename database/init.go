@@ -1,6 +1,7 @@
 package database
 
 import (
+	"context"
 	"database/sql"
 	"log"
 	"sync"
@@ -41,10 +42,23 @@ func NewConnection() *sql.DB {
 	return data
 }
 
-// Check connection to the database
+// Data is the function to get the database usage in the packages that need it
+func Data() *sql.DB {
+	return data
+}
+
+// Check that the connection to the database is available
 func CheckConnection() bool {
 
-	err := data.Ping()
+	db, err := data.Conn(context.Background())
+
+	if err != nil {
+		panic(err)
+	}
+
+	defer db.Close()
+
+	err = db.PingContext(context.Background())
 
 	if err != nil {
 		return false

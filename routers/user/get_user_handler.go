@@ -1,17 +1,17 @@
-package routers
+package user
 
 import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/tapiaw38/pottery-api/database"
+	user "github.com/tapiaw38/pottery-api/database/user"
 )
 
 // GetUsersHandler handles the request to get all users
 func GetUsersHandler(w http.ResponseWriter, r *http.Request) {
 
 	ctx := r.Context()
-	users, err := database.GetUsers(ctx)
+	users, err := user.GetUsers(ctx)
 
 	if err != nil {
 		http.Error(w, "An error occurred when trying to get users "+err.Error(), 400)
@@ -30,7 +30,7 @@ func GetUserByIdHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	id := r.URL.Query().Get("id")
 
-	user, err := database.GetUserById(ctx, id)
+	user, err := user.GetUserById(ctx, id)
 
 	if err != nil {
 		http.Error(w, "An error occurred when trying to get user "+err.Error(), 400)
@@ -49,7 +49,7 @@ func GetUserByUsernameHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	username := r.URL.Query().Get("username")
 
-	user, err := database.GetUserByUsername(ctx, username)
+	user, err := user.GetUserByUsername(ctx, username)
 
 	if err != nil {
 		http.Error(w, "An error occurred when trying to get user "+err.Error(), 400)

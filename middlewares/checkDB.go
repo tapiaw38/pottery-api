@@ -12,7 +12,7 @@ func CheckDB(next http.HandlerFunc) http.HandlerFunc {
 		err := database.CheckConnection()
 
 		if !err {
-			http.Error(w, "An error occurred when trying to connect to the database", 500)
+			http.Error(w, "An error occurred, the connection to the database is not available", 500)
 			return
 		}
 

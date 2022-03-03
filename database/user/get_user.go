@@ -1,8 +1,9 @@
-package database
+package user
 
 import (
 	"context"
 
+	"github.com/tapiaw38/pottery-api/database"
 	"github.com/tapiaw38/pottery-api/models"
 )
 
@@ -14,7 +15,7 @@ func GetUsers(ctx context.Context) ([]models.User, error) {
 		FROM users;
 	`
 
-	rows, err := data.QueryContext(ctx, q)
+	rows, err := database.Data().QueryContext(ctx, q)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +48,7 @@ func GetUserById(ctx context.Context, id string) (*models.User, error) {
 		WHERE id = $1;
 	`
 
-	row := data.QueryRowContext(
+	row := database.Data().QueryRowContext(
 		ctx, q, id,
 	)
 
@@ -71,7 +72,7 @@ func GetUserByUsername(ctx context.Context, username string) (*models.User, erro
 		WHERE username = $1;
 	`
 
-	row := data.QueryRowContext(
+	row := database.Data().QueryRowContext(
 		ctx, q, username,
 	)
 

@@ -1,10 +1,10 @@
-package routers
+package user
 
 import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/tapiaw38/pottery-api/database"
+	user "github.com/tapiaw38/pottery-api/database/user"
 	"github.com/tapiaw38/pottery-api/models"
 )
 
@@ -23,7 +23,7 @@ func CreateUserHandler(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 
 	ctx := r.Context()
-	err = database.CreateUser(ctx, &u)
+	user, err := user.CreateUser(ctx, &u)
 
 	if err != nil {
 		http.Error(w, "An error occurred when trying to enter a user in database "+err.Error(), 400)
@@ -39,4 +39,6 @@ func CreateUserHandler(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
+	json.NewEncoder(w).Encode(user)
+
 }

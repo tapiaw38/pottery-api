@@ -8,6 +8,7 @@ import (
 	"github.com/tapiaw38/pottery-api/models"
 )
 
+// UpdateUser updates a user in the database
 func UpdateUser(ctx context.Context, id string, u models.User) (models.User, error) {
 
 	var user models.User

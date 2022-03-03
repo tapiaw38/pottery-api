@@ -8,6 +8,7 @@ import (
 	"github.com/tapiaw38/pottery-api/models"
 )
 
+// UpdateUserHandler handles the request to update a user
 func UpdateUserHandler(w http.ResponseWriter, r *http.Request) {
 
 	var u models.User

@@ -33,7 +33,7 @@ func GetUserByIdHandler(w http.ResponseWriter, r *http.Request) {
 	user, err := user.GetUserById(ctx, id)
 
 	if err != nil {
-		http.Error(w, "An error occurred when trying to get user "+err.Error(), 400)
+		http.Error(w, "No record found with that id", 404)
 		return
 	}
 
@@ -52,7 +52,7 @@ func GetUserByUsernameHandler(w http.ResponseWriter, r *http.Request) {
 	user, err := user.GetUserByUsername(ctx, username)
 
 	if err != nil {
-		http.Error(w, "An error occurred when trying to get user "+err.Error(), 400)
+		http.Error(w, "No record found with that username", 404)
 		return
 	}
 

@@ -29,6 +29,8 @@ func HandlerServer() {
 		http.MethodGet).HandlerFunc(middlewares.CheckDB(user.GetUserByUsernameHandler))
 	users.Path("/update").Methods(
 		http.MethodPut).HandlerFunc(middlewares.CheckDB(user.UpdateUserHandler))
+	users.Path("/delete").Methods(
+		http.MethodDelete).HandlerFunc(middlewares.CheckDB(user.DeleteUserHandler))
 
 	// Initialize the server
 	PORT := os.Getenv("PORT")

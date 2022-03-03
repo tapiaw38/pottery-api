@@ -10,7 +10,8 @@ import (
 func DeleteUser(ctx context.Context, id string) error {
 
 	q := `
-		DELETE FROM users
+	UPDATE users
+		SET is_active = false
 		WHERE id = $1;
 	`
 

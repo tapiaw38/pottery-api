@@ -21,7 +21,7 @@ func HandlerServer() {
 	// Routes for users
 	users.Path("/register").Methods(
 		http.MethodPost).HandlerFunc(middlewares.CheckDB(user.CreateUserHandler))
-	users.Path("getall").Methods(
+	users.Path("").Methods(
 		http.MethodGet).HandlerFunc(middlewares.CheckDB(user.GetUsersHandler))
 	users.Path("/user").Methods(
 		http.MethodGet).HandlerFunc(middlewares.CheckDB(user.GetUserByIdHandler))

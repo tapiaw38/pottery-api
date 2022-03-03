@@ -11,7 +11,7 @@ import (
 func GetUsers(ctx context.Context) ([]models.User, error) {
 
 	q := `
-	SELECT id, first_name, last_name, username, email, picture, password, created_at, updated_at
+	SELECT id, first_name, last_name, username, email, picture, password, is_active, is_admin, created_at, updated_at
 		FROM users;
 	`
 
@@ -27,7 +27,19 @@ func GetUsers(ctx context.Context) ([]models.User, error) {
 	for rows.Next() {
 		var u models.User
 
-		err := rows.Scan(&u.ID, &u.FirstName, &u.LastName, &u.Username, &u.Email, &u.Picture, &u.PasswordHash, &u.CreatedAt, &u.UpdatedAt)
+		err := rows.Scan(
+			&u.ID,
+			&u.FirstName,
+			&u.LastName,
+			&u.Username,
+			&u.Email,
+			&u.Picture,
+			&u.PasswordHash,
+			&u.IsActive,
+			&u.IsAdmin,
+			&u.CreatedAt,
+			&u.UpdatedAt,
+		)
 		if err != nil {
 			return nil, err
 		}
@@ -43,7 +55,7 @@ func GetUsers(ctx context.Context) ([]models.User, error) {
 func GetUserById(ctx context.Context, id string) (*models.User, error) {
 
 	q := `
-	SELECT id, first_name, last_name, username, email, picture, created_at, updated_at
+	SELECT id, first_name, last_name, username, email, picture, is_active, is_admin, created_at, updated_at
 		FROM users
 		WHERE id = $1;
 	`
@@ -54,7 +66,19 @@ func GetUserById(ctx context.Context, id string) (*models.User, error) {
 
 	u := models.User{}
 
-	err := row.Scan(&u.ID, &u.FirstName, &u.LastName, &u.Username, &u.Email, &u.Picture, &u.CreatedAt, &u.UpdatedAt)
+	err := row.Scan(
+		&u.ID,
+		&u.FirstName,
+		&u.LastName,
+		&u.Username,
+		&u.Email,
+		&u.Picture,
+		&u.IsActive,
+		&u.IsAdmin,
+		&u.CreatedAt,
+		&u.UpdatedAt,
+	)
+
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +91,7 @@ func GetUserById(ctx context.Context, id string) (*models.User, error) {
 func GetUserByUsername(ctx context.Context, username string) (*models.User, error) {
 
 	q := `
-	SELECT id, first_name, last_name, username, email, picture, created_at, updated_at
+	SELECT id, first_name, last_name, username, email, picture, is_active, is_admin, created_at, updated_at
 		FROM users
 		WHERE username = $1;
 	`
@@ -78,7 +102,19 @@ func GetUserByUsername(ctx context.Context, username string) (*models.User, erro
 
 	u := models.User{}
 
-	err := row.Scan(&u.ID, &u.FirstName, &u.LastName, &u.Username, &u.Email, &u.Picture, &u.CreatedAt, &u.UpdatedAt)
+	err := row.Scan(
+		&u.ID,
+		&u.FirstName,
+		&u.LastName,
+		&u.Username,
+		&u.Email,
+		&u.Picture,
+		&u.IsActive,
+		&u.IsAdmin,
+		&u.CreatedAt,
+		&u.UpdatedAt,
+	)
+
 	if err != nil {
 		return nil, err
 	}

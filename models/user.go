@@ -14,6 +14,8 @@ type User struct {
 	Picture      string `json:"picture,omitempty"`
 	Password     string `json:"password,omitempty"`
 	PasswordHash string `json:"-"`
+	IsActive     bool   `json:"is_active,omitempty"`
+	IsAdmin      bool   `json:"is_admin,omitempty"`
 	Base
 }
 

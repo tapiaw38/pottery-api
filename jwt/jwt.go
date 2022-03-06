@@ -7,6 +7,7 @@ import (
 	"github.com/tapiaw38/pottery-api/models"
 )
 
+// GenerateToken generates a JWT token
 func GenerateJWT(user models.User) (string, error) {
 
 	myKey := []byte("bXlTZWNyZXRQYXNzd29yZG15U2VjcmV0UGFzc3dvcmQK")

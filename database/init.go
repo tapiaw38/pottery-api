@@ -60,9 +60,5 @@ func CheckConnection() bool {
 
 	err = db.PingContext(context.Background())
 
-	if err != nil {
-		return false
-	}
-
-	return true
+	return err == nil
 }

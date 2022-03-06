@@ -12,6 +12,7 @@ import (
 	login "github.com/tapiaw38/pottery-api/database/login"
 )
 
+// Login handles the request to login a user
 func LoginHandler(w http.ResponseWriter, r *http.Request) {
 
 	var user models.User

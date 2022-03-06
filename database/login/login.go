@@ -4,6 +4,7 @@ import (
 	"github.com/tapiaw38/pottery-api/models"
 )
 
+// Login is function to return the user
 func Login(email string, password string) (models.User, bool) {
 
 	user, find := CheckUser(email)

@@ -1,0 +1,20 @@
+package login
+
+import (
+	"github.com/tapiaw38/pottery-api/models"
+)
+
+func Login(email string, password string) (models.User, bool) {
+
+	user, find := CheckUser(email)
+
+	if !find {
+		return user, false
+	}
+
+	if !user.PasswordMatch(password) {
+		return user, false
+	}
+
+	return user, true
+}

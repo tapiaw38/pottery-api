@@ -8,6 +8,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
 	"github.com/tapiaw38/pottery-api/middlewares"
+	login "github.com/tapiaw38/pottery-api/routers/login"
 	user "github.com/tapiaw38/pottery-api/routers/user"
 )
 
@@ -31,6 +32,8 @@ func HandlerServer() {
 		http.MethodPut).HandlerFunc(middlewares.CheckDB(user.UpdateUserHandler))
 	users.Path("/delete").Methods(
 		http.MethodDelete).HandlerFunc(middlewares.CheckDB(user.DeleteUserHandler))
+	users.Path("/login").Methods(
+		http.MethodPost).HandlerFunc(middlewares.CheckDB(login.LoginHandler))
 
 	// Initialize the server
 	PORT := os.Getenv("PORT")
